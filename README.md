@@ -6,6 +6,7 @@ New rules was made :
     Each class must be designed in Orthodox Canonical Form
         A class correctly manages its resources, particularly when dealing with dynamic memory
         A class in OCF must implement these FOUR SPECIAL MEMBER FUNCTION :
+        
         1. Default Constructor (ClassName())
             > Initializes objects when no arguments are provided.
         
