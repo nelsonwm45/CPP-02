@@ -1,8 +1,10 @@
-# Orthodox Canonical Form (OCF) in C++
+# 📌 Orthodox Canonical Form (OCF) in C++
 
 ## 📜 Rules
-In C++ development, the **Orthodox Canonical Form (OCF)** ensures that a class correctly manages its resources, especially when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
+The **Orthodox Canonical Form (OCF)** ensures that a C++ class correctly manages its resources, particularly when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
 
+---
+## 🚀 Special Member Functions
 ### **1️⃣ Default Constructor**
 ```cpp
 ClassName();
@@ -31,8 +33,7 @@ ClassName& operator=(const ClassName& other);
 - Cleans up allocated resources to **prevent memory leaks**.
 
 ---
-
-## 🔹 **Basic Example of OCF Implementation**
+## 💡 **Example: Implementing OCF**
 ```cpp
 #include <iostream>
 #include <cstring>
@@ -108,18 +109,14 @@ int main() {
 ```
 
 ---
-
 ## ⚠️ **Shallow Copy vs. Deep Copy**
-### **Shallow Copy** (🚨 Dangerous)
-- Copies only the **memory address** (pointers) instead of duplicating the actual data.
+
+### **Shallow Copy (🚨 Dangerous)**
+- Copies only the **memory address** instead of duplicating the actual data.
 - If two objects share the **same memory location**, modifying one affects the other.
 - If the original object is deleted, the copied object **may end up with a dangling pointer**, leading to **undefined behavior**.
 
-🔻 **Problems with Shallow Copy:**
-- Both objects **share the same memory**, so deleting one affects the other.
-- Leads to **dangling pointers** and **double deletion errors**.
-
-### **Shallow Copy Example**
+#### **Example of Shallow Copy Issue**
 ```cpp
 #include <iostream>
 
@@ -155,7 +152,7 @@ int main() {
 ### **Deep Copy (✅ Safe)**
 To **fix shallow copy issues**, we need to implement a **deep copy**, where a new memory block is allocated for each object.
 
-### **Deep Copy Example**
+#### **Example of Deep Copy Implementation**
 ```cpp
 class DeepCopy {
 private:
@@ -177,3 +174,35 @@ public:
     }
 };
 ```
+
+---
+## 📌 **Difference Between Copy Constructor & Copy Assignment Operator**
+
+| Code | Constructor/Operator Called |
+|------|-----------------------------|
+| `MyClass obj2 = obj1;` | **Copy Constructor** |
+| `MyClass obj3;` <br> `obj3 = obj1;` | **Copy Assignment Operator** |
+
+### **🔹 Copy Constructor**
+📌 **Called when declaring and initializing an object at the same time.**
+
+#### **Example**
+```cpp
+MyClass obj1;       // Default Constructor
+MyClass obj2 = obj1; // 📌 Copy Constructor is called
+```
+💡 `obj2` is created **using `obj1`**, so the **copy constructor** is used.
+
+---
+### **🔹 Copy Assignment Operator (`operator=`)**
+📌 **Called when an already declared object is assigned a value from another object.**
+
+#### **Example**
+```cpp
+MyClass obj1;  // Default Constructor
+MyClass obj2;  // Default Constructor
+
+obj2 = obj1;   // 📌 Copy Assignment Operator is called
+```
+💡 `obj2` was **already created**, so the **copy assignment operator** is used to copy `obj1`'s data.
+
