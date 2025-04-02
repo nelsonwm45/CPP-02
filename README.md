@@ -1,28 +1,39 @@
-# CPP-02
+# Orthodox Canonical Form (OCF) in C++
 
-## Orthodox Canonical Form
+## 📜 Rules
+In C++ development, the **Orthodox Canonical Form (OCF)** ensures that a class correctly manages its resources, especially when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
 
-New rules was made :
-Each class must be designed in Orthodox Canonical Form
-A class correctly manages its resources, particularly when dealing with dynamic memory
-A class in OCF must implement these FOUR SPECIAL MEMBER FUNCTION :
-
-        1. Default Constructor (ClassName())
-            > Initializes objects when no arguments are provided.
-        
-        2. Copy constructor (ClassName(const ClassName& other))
-            > Creates a new object as a copy of an existing one.
-            > Ensures deep copying if the class manages dynamic memory.
-        
-        3. Copy assignment operator (ClassName& operator=(const ClassName& other))
-            > Assigns one existing object to another, ensuring proper resource management.
-            > Handles self-assignment and deep copying if needed.
-        
-        4. Destructor (~ClassName())
-            > Cleans up any allocated resources to prevent memory leaks.
-    
-**Basic Code Example**
+### **1️⃣ Default Constructor**
+```cpp
+ClassName();
 ```
+- Initializes objects when no arguments are provided.
+
+### **2️⃣ Copy Constructor**
+```cpp
+ClassName(const ClassName& other);
+```
+- Creates a **new object** as a copy of an existing one.
+- Ensures **deep copying** if the class manages dynamic memory.
+- The **default copy constructor** performs a **shallow copy**.
+
+### **3️⃣ Copy Assignment Operator**
+```cpp
+ClassName& operator=(const ClassName& other);
+```
+- Assigns one existing object to another, ensuring **proper resource management**.
+- Handles **self-assignment** and **deep copying** if needed.
+
+### **4️⃣ Destructor**
+```cpp
+~ClassName();
+```
+- Cleans up allocated resources to **prevent memory leaks**.
+
+---
+
+## 🔹 **Basic Example of OCF Implementation**
+```cpp
 #include <iostream>
 #include <cstring>
 
@@ -31,12 +42,12 @@ private:
     char* data;
 
 public:
-    // 1. Default constructor
+    // 1️⃣ Default Constructor
     MyClass() : data(nullptr) {
         std::cout << "Default constructor called.\n";
     }
 
-    // 2. Copy constructor (deep copy)
+    // 2️⃣ Copy Constructor (Deep Copy)
     MyClass(const MyClass& other) {
         std::cout << "Copy constructor called.\n";
         if (other.data) {
@@ -47,7 +58,7 @@ public:
         }
     }
 
-    // 3. Copy assignment operator (deep copy)
+    // 3️⃣ Copy Assignment Operator (Deep Copy)
     MyClass& operator=(const MyClass& other) {
         std::cout << "Copy assignment operator called.\n";
         if (this != &other) {  // Prevent self-assignment
@@ -62,7 +73,7 @@ public:
         return *this;
     }
 
-    // 4. Destructor
+    // 4️⃣ Destructor
     ~MyClass() {
         std::cout << "Destructor called.\n";
         delete[] data;
@@ -96,19 +107,20 @@ int main() {
 }
 ```
 
-**Shallow Copy**
+---
 
-Copies only memory address(pointers) rather than duplicating the actual data:
-    If the original object and the copied object share the same memory location, modifying one affects the other.
-    If the original object is deleted, the copied object may end up with a dangling pointer, leading to undefined behavior.
-    
-Problems with Shallow Copy:
-    Both objects share the same memory, so deleting one object affects the other.
-    Leads to dangling pointers and double deletion errors.
+## ⚠️ **Shallow Copy vs. Deep Copy**
+### **Shallow Copy** (🚨 Dangerous)
+- Copies only the **memory address** (pointers) instead of duplicating the actual data.
+- If two objects share the **same memory location**, modifying one affects the other.
+- If the original object is deleted, the copied object **may end up with a dangling pointer**, leading to **undefined behavior**.
 
-**Basic Code**
+🔻 **Problems with Shallow Copy:**
+- Both objects **share the same memory**, so deleting one affects the other.
+- Leads to **dangling pointers** and **double deletion errors**.
 
-```
+### **Shallow Copy Example**
+```cpp
 #include <iostream>
 
 class Shallow {
@@ -138,4 +150,30 @@ int main() {
 
     return 0;
 }
+```
+
+### **Deep Copy (✅ Safe)**
+To **fix shallow copy issues**, we need to implement a **deep copy**, where a new memory block is allocated for each object.
+
+### **Deep Copy Example**
+```cpp
+class DeepCopy {
+private:
+    int* data;
+
+public:
+    // Constructor
+    DeepCopy(int val) {
+        data = new int(val);
+    }
+
+    // Copy Constructor (Deep Copy)
+    DeepCopy(const DeepCopy& other) {
+        data = new int(*other.data); // Allocate new memory and copy value
+    }
+
+    ~DeepCopy() {
+        delete data;
+    }
+};
 ```
