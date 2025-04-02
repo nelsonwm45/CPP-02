@@ -3,10 +3,10 @@
 ## Orthodox Canonical Form
 
 New rules was made :
-    Each class must be designed in Orthodox Canonical Form
-        A class correctly manages its resources, particularly when dealing with dynamic memory
-        A class in OCF must implement these FOUR SPECIAL MEMBER FUNCTION :
-        
+Each class must be designed in Orthodox Canonical Form
+A class correctly manages its resources, particularly when dealing with dynamic memory
+A class in OCF must implement these FOUR SPECIAL MEMBER FUNCTION :
+
         1. Default Constructor (ClassName())
             > Initializes objects when no arguments are provided.
         
@@ -97,13 +97,16 @@ int main() {
 ```
 
 **Shallow Copy**
-    Copies only memory address(pointers) rather than duplicating the actual data:
-        If the original object and the copied object share the same memory location, modifying one affects the other.
-        If the original object is deleted, the copied object may end up with a dangling pointer, leading to undefined behavior.
+
+Copies only memory address(pointers) rather than duplicating the actual data:
+    If the original object and the copied object share the same memory location, modifying one affects the other.
+    If the original object is deleted, the copied object may end up with a dangling pointer, leading to undefined behavior.
     
-    Problems with Shallow Copy:
-        Both objects share the same memory, so deleting one object affects the other.
-        Leads to dangling pointers and double deletion errors.
+Problems with Shallow Copy:
+    Both objects share the same memory, so deleting one object affects the other.
+    Leads to dangling pointers and double deletion errors.
+
+**Basic Code**
 
 ```
 #include <iostream>
