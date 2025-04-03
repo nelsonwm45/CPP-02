@@ -1,39 +1,52 @@
 # 📌 Orthodox Canonical Form (OCF) in C++
 
 ## 📜 Overview
+
 The **Orthodox Canonical Form (OCF)** ensures that a C++ class correctly manages its resources, particularly when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
 
 ---
+
 ## 🚀 Special Member Functions
+
 ### **1️⃣ Default Constructor**
+
 ```cpp
 ClassName();
 ```
+
 - Initializes objects when no arguments are provided.
 
 ### **2️⃣ Copy Constructor**
+
 ```cpp
 ClassName(const ClassName& other);
 ```
+
 - Creates a **new object** as a copy of an existing one.
 - Ensures **deep copying** if the class manages dynamic memory.
 - The **default copy constructor** performs a **shallow copy**.
 
 ### **3️⃣ Copy Assignment Operator**
+
 ```cpp
 ClassName& operator=(const ClassName& other);
 ```
+
 - Assigns one existing object to another, ensuring **proper resource management**.
 - Handles **self-assignment** and **deep copying** if needed.
 
 ### **4️⃣ Destructor**
+
 ```cpp
 ~ClassName();
 ```
+
 - Cleans up allocated resources to **prevent memory leaks**.
 
 ---
+
 ## 💡 **Example: Implementing OCF**
+
 ```cpp
 #include <iostream>
 #include <cstring>
@@ -109,87 +122,15 @@ int main() {
 ```
 
 ---
-## ⚠️ **Shallow Copy vs. Deep Copy**
 
-### **Shallow Copy (🚨 Dangerous)**
-- Copies only the **memory address** instead of duplicating the actual data.
-- If two objects share the **same memory location**, modifying one affects the other.
-- If the original object is deleted, the copied object **may end up with a dangling pointer**, leading to **undefined behavior**.
-
-#### **Example of Shallow Copy Issue**
-```cpp
-#include <iostream>
-
-class Shallow {
-public:
-    int* data;
-
-    Shallow(int val) {
-        data = new int(val); // Allocate memory
-    }
-
-    // Default copy constructor (shallow copy)
-    Shallow(const Shallow& other) = default;
-
-    ~Shallow() {
-        delete data; // This will cause problems if multiple objects share the same memory
-    }
-};
-
-int main() {
-    Shallow obj1(10);
-    Shallow obj2 = obj1; // Shallow copy (both obj1 and obj2 point to the same memory)
-
-    std::cout << "obj1 data: " << *(obj1.data) << "\n";
-    std::cout << "obj2 data: " << *(obj2.data) << "\n";
-
-    delete obj1.data; // Now obj2.data is a dangling pointer!
-
-    return 0;
-}
-```
-
-### **Deep Copy (✅ Safe)**
-To **fix shallow copy issues**, we need to implement a **deep copy**, where a new memory block is allocated for each object.
-
-#### **Example of Deep Copy Implementation**
-```cpp
-class DeepCopy {
-private:
-    int* data;
-
-public:
-    // Constructor
-    DeepCopy(int val) {
-        data = new int(val);
-    }
-
-    // Copy Constructor (Deep Copy)
-    DeepCopy(const DeepCopy& other) {
-        data = new int(*other.data); // Allocate new memory and copy value
-    }
-
-    ~DeepCopy() {
-        delete data;
-    }
-};
-```
-
----
-## 📌 **Difference Between Copy Constructor & Copy Assignment Operator**
-
-| Code | Constructor/Operator Called |
-|------|-----------------------------|
-| `MyClass obj2 = obj1;` | **Copy Constructor** |
-| `MyClass obj3;` <br> `obj3 = obj1;` | **Copy Assignment Operator** |
-
----
 # 🎯 **Operator Overloading in C++**
 
 ## 🚀 What is Operator Overloading?
+
 Operator overloading allows you to **redefine the behavior of operators** (`+`, `-`, `=`, `==`, etc.) for user-defined types (classes/structs).
 
 ### **Example: Overloading `+` Operator**
+
 ```cpp
 #include <iostream>
 
@@ -216,12 +157,65 @@ int main() {
     v3.display(); // Output: (4, 6)
 }
 ```
+---
+
+### 🎯 **Precision vs. Accuracy**
+
+- **Precision**: How detailed or consistent a value is when repeatedly measured.
+- **Accuracy**: How close a value is to the true or expected value.
+
+📌 **Example**:
+- A floating-point number may be **precise** (many decimal places) but **not accurate** (rounding errors).
+- A fixed-point number may be **accurate** (exact representation) but **less precise** (limited decimal places).
 
 ---
+
 # 🔢 **Integer, Fixed-Point, and Floating-Point Numbers**
 
-| Type | Can Store Decimals? | Precision | Speed | Common Use |
-|------|---------------------|----------|------|------------|
-| Integer | ❌ No | 🔹 Exact | ⚡ Fast | Counting, indexing |
-| Fixed-Point | ✅ Yes (Fixed #) | ✅ High | ⚡ Fast | Finance, currency |
-| Floating-Point | ✅ Yes (Variable) | ❌ May lose precision | 🔢 Slower | Scientific computing |
+| Type           | Can Store Decimals? | Precision            | Accuracy         | Speed     | Common Use           |
+| -------------- | ------------------- | -------------------- | ---------------- | --------- | -------------------- |
+| Integer        | ❌ No                | 🔹 Exact             | ✅ High           | ⚡ Fast    | Counting, indexing   |
+| Fixed-Point    | ✅ Yes (Fixed #)     | ✅ High               | ✅ High           | ⚡ Fast    | Finance, currency    |
+| Floating-Point | ✅ Yes (Variable)    | ❌ May lose precision | ❌ May lose accuracy | 🔢 Slower | Scientific computing |
+
+## Floating Point 
+Floating-point numbers are stored in a sign + exponent + mantissa format.
+
+✅ Computers use binary scientific notation.
+
+❌ Not all decimal numbers can be exactly stored in binary, causing rounding errors.
+
+📜 IEEE 754 helps standardize floating-point representation across computers.
+
+---
+
+## Fixed-Point Number
+Example Calculation:
+
+53 (decimal) → 110101 (binary)
+
+53 / 2 = 26.5 → 110101.2 (binary representation after division)
+
+Shifting the bit pattern:
+
+Shifting a fixed-point number right divides by 2.
+
+Shifting a fixed-point number left multiplies by 2.
+
+Fixed-Point Representation: To define a fixed-point, two parameters are needed:
+
+Width of the number representation.
+
+Binary point position within the number.
+
+Notation: fixed<w,b>
+
+w: Width of the number.
+
+b: Position of the binary point (from least significant bit).
+
+Example: fixed<8,3> with representation 0 0 0 1 0 1 1 0 means:
+
+110 is behind the binary point.
+
+00010.110 (binary representation).

@@ -13,7 +13,7 @@ WHITE='\033[0;97m'
 PINK  = '\033[35m'
 
 # Program Name
-NAME = BraiiiiiiinnnzzzZ
+NAME = Fixed_OCF
 
 # Compiler
 CC = c++
@@ -23,9 +23,7 @@ RM = rm -f
 
 # Source and Object
 SRCS =	main.cpp \
-		Zombie.cpp \
-		newZombie.cpp \
-		randomChump.cpp \
+		Fixed.cpp \
 
 		
 OBJ = $(SRCS:.cpp=.o)
