@@ -159,7 +159,7 @@ int main() {
 ```
 ---
 
-### 🎯 **Precision vs. Accuracy**
+## 🎯 **Precision vs. Accuracy**
 
 - **Precision**: How detailed or consistent a value is when repeatedly measured.
 - **Accuracy**: How close a value is to the true or expected value.
@@ -178,44 +178,45 @@ int main() {
 | Fixed-Point    | ✅ Yes (Fixed #)     | ✅ High               | ✅ High           | ⚡ Fast    | Finance, currency    |
 | Floating-Point | ✅ Yes (Variable)    | ❌ May lose precision | ❌ May lose accuracy | 🔢 Slower | Scientific computing |
 
-## Floating Point 
-Floating-point numbers are stored in a sign + exponent + mantissa format.
+---
 
-✅ Computers use binary scientific notation.
+## Floating-Point Numbers
 
-❌ Not all decimal numbers can be exactly stored in binary, causing rounding errors.
+Floating-point numbers are stored in a **sign + exponent + mantissa** format.
 
-📜 IEEE 754 helps standardize floating-point representation across computers.
+✅ Computers use **binary scientific notation**.
+
+❌ Not all decimal numbers can be exactly stored in binary, causing **rounding errors**.
+
+📜 **IEEE 754** helps standardize floating-point representation across computers.
 
 ---
 
-## Fixed-Point Number
-Example Calculation:
+## Fixed-Point Numbers
 
-53 (decimal) → 110101 (binary)
+### Example Calculation:
 
-53 / 2 = 26.5 → 110101.2 (binary representation after division)
+- **53 (decimal) → 110101 (binary)**
+- **53 / 2 = 26.5 → 110101.2 (binary representation after division)**
 
-Shifting the bit pattern:
+### Shifting the Bit Pattern:
 
-Shifting a fixed-point number right divides by 2.
+- **Shifting a fixed-point number right** divides by 2.
+- **Shifting a fixed-point number left** multiplies by 2.
 
-Shifting a fixed-point number left multiplies by 2.
+### Fixed-Point Representation:
+To define a fixed-point number, two parameters are needed:
 
-Fixed-Point Representation: To define a fixed-point, two parameters are needed:
+1️⃣ **Width of the number representation.**
+2️⃣ **Binary point position within the number.**
 
-Width of the number representation.
+### Notation: `fixed<w,b>`
 
-Binary point position within the number.
+- `w`: Width of the number.
+- `b`: Position of the binary point (from least significant bit).
 
-Notation: fixed<w,b>
+Example: `fixed<8,3>` with representation **00010.110** means:
 
-w: Width of the number.
+- `110` is behind the binary point.
+- **Binary representation**: `00010.110`.
 
-b: Position of the binary point (from least significant bit).
-
-Example: fixed<8,3> with representation 0 0 0 1 0 1 1 0 means:
-
-110 is behind the binary point.
-
-00010.110 (binary representation).
