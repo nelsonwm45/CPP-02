@@ -1,6 +1,6 @@
 # 📌 Orthodox Canonical Form (OCF) in C++
 
-## 📜 Rules
+## 📜 Overview
 The **Orthodox Canonical Form (OCF)** ensures that a C++ class correctly manages its resources, particularly when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
 
 ---
@@ -183,26 +183,45 @@ public:
 | `MyClass obj2 = obj1;` | **Copy Constructor** |
 | `MyClass obj3;` <br> `obj3 = obj1;` | **Copy Assignment Operator** |
 
-### **🔹 Copy Constructor**
-📌 **Called when declaring and initializing an object at the same time.**
+---
+# 🎯 **Operator Overloading in C++**
 
-#### **Example**
+## 🚀 What is Operator Overloading?
+Operator overloading allows you to **redefine the behavior of operators** (`+`, `-`, `=`, `==`, etc.) for user-defined types (classes/structs).
+
+### **Example: Overloading `+` Operator**
 ```cpp
-MyClass obj1;       // Default Constructor
-MyClass obj2 = obj1; // 📌 Copy Constructor is called
+#include <iostream>
+
+class Vector2D {
+public:
+    int x, y;
+
+    Vector2D(int a, int b) : x(a), y(b) {}
+
+    // Overloading + operator
+    Vector2D operator+(const Vector2D& other) const {
+        return Vector2D(x + other.x, y + other.y);
+    }
+
+    void display() const {
+        std::cout << "(" << x << ", " << y << ")\n";
+    }
+};
+
+int main() {
+    Vector2D v1(3, 4), v2(1, 2);
+    Vector2D v3 = v1 + v2;  // Uses overloaded +
+    
+    v3.display(); // Output: (4, 6)
+}
 ```
-💡 `obj2` is created **using `obj1`**, so the **copy constructor** is used.
 
 ---
-### **🔹 Copy Assignment Operator (`operator=`)**
-📌 **Called when an already declared object is assigned a value from another object.**
+# 🔢 **Integer, Fixed-Point, and Floating-Point Numbers**
 
-#### **Example**
-```cpp
-MyClass obj1;  // Default Constructor
-MyClass obj2;  // Default Constructor
-
-obj2 = obj1;   // 📌 Copy Assignment Operator is called
-```
-💡 `obj2` was **already created**, so the **copy assignment operator** is used to copy `obj1`'s data.
-
+| Type | Can Store Decimals? | Precision | Speed | Common Use |
+|------|---------------------|----------|------|------------|
+| Integer | ❌ No | 🔹 Exact | ⚡ Fast | Counting, indexing |
+| Fixed-Point | ✅ Yes (Fixed #) | ✅ High | ⚡ Fast | Finance, currency |
+| Floating-Point | ✅ Yes (Variable) | ❌ May lose precision | 🔢 Slower | Scientific computing |
