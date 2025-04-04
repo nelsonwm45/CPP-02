@@ -194,21 +194,21 @@ int main() {
 
 Example: **6.75 in IEEE 754 format**
 1. Convert `6.75` to binary → `110.11`
->> **Integer:** 6 in binary is 110
->> **Fractional Bits:** 0.75
+- **Integer:** 6 in binary is 110
+- **Fractional Bits:** 0.75
 - Multiply 0.75 by 2 → 1.5 (take the 1).
 - Multiply 0.5 by 2 → 1.0 (take the 1).
 - So 0.75 becomes .11 in binary.
->> `6.75` to binary → `110.11`
+- `6.75` to binary → `110.11`
 
 2. Normalize `110.11` → `1.1011 × 2^2`
->> **Mantissa** : 1.1011 (ignoring the leading 1).
->> **Exponent** : 2 because the decimal point moved 2 places to the left.
+- **Mantissa** : 1.1011 (ignoring the leading 1).
+- **Exponent** : 2 because the decimal point moved 2 places to the left.
 
 3. Store as `Sign | Exponent (biased) | Mantissa`
->> **Sign Bit** : 0
->> **Exponenet Bit** : 2 + 127 = 129; 10000001(binary)
->> **Mantissa** : Ignore leading 1; and store rest (10110000000000000000000).
+- **Sign Bit** : 0
+- **Exponenet Bit** : 2 + 127 = 129; 10000001(binary)
+- **Mantissa** : Ignore leading 1; and store rest (10110000000000000000000).
 
 ---
 ## Fixed-Point Numbers
