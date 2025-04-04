@@ -180,6 +180,17 @@ int main() {
 
 ---
 
+## 🔹 Key Differences in Precision:
+
+| Feature                | Floating-Point                                  | Fixed-Point                                       |
+|------------------------|-----------------------------------------------|--------------------------------------------------|
+| Representation         | Approximation of real numbers (scientific notation) | Exact representation of fixed-point numbers |
+| Precision             | Limited to a few significant digits (7-16)    | High precision based on frac_bits              |
+| Arithmetic Operations | Rounding errors accumulate                     | Exact arithmetic with no rounding errors       |
+| Use Cases            | Ideal for scientific calculations but not for money, counters, or hardware | Ideal for embedded systems, financial applications, and hardware without floating-point support |
+
+---
+
 ## Floating-Point Numbers
 
 Floating-point numbers are stored in a **sign + exponent + mantissa** format.
@@ -205,6 +216,7 @@ Floating-point numbers are stored in a **sign + exponent + mantissa** format.
 - **Shifting a fixed-point number left** multiplies by 2.
 
 ### Fixed-Point Representation:
+
 To define a fixed-point number, two parameters are needed:
 
 1️⃣ **Width of the number representation.**
@@ -218,5 +230,5 @@ To define a fixed-point number, two parameters are needed:
 Example: `fixed<8,3>` with representation **00010.110** means:
 
 - `110` is behind the binary point.
-- **Binary representation**: `00010.110`.
+- **Binary representation**: `00010.110`. 
 
