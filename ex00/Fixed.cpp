@@ -13,16 +13,16 @@ Fixed::Fixed(): fixed_value(0)
 // Shallow copy is sufficient for int variable
 Fixed::Fixed(const Fixed& other)
 {
-	this->fixed_value = other.fixed_value;
 	std::cout << BLUE << "Copy constructor called" << RESET << std::endl; 
+	this->fixed_value = other.getRawBits();
 }
 
 // Copy Assignment Operator
 Fixed	&Fixed::operator=(const Fixed& other)
 {
-	if (this != &other)
-		this->fixed_value = other.fixed_value;
 	std::cout << YELLOW << "Copy assignment operator called" << RESET << std::endl;
+	if (this != &other)
+		this->fixed_value = other.getRawBits();
 	return (*this);
 }
 
