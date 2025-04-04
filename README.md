@@ -1,5 +1,7 @@
 # 📌 Orthodox Canonical Form (OCF) in C++
 
+---
+
 ## 📜 Overview
 
 The **Orthodox Canonical Form (OCF)** ensures that a C++ class correctly manages its resources, particularly when dealing with **dynamic memory**. A class following OCF must implement the following **four special member functions**:
@@ -157,16 +159,6 @@ int main() {
     v3.display(); // Output: (4, 6)
 }
 ```
----
-
-## 🎯 **Precision vs. Accuracy**
-
-- **Precision**: How detailed or consistent a value is when repeatedly measured.
-- **Accuracy**: How close a value is to the true or expected value.
-
-📌 **Example**:
-- A floating-point number may be **precise** (many decimal places) but **not accurate** (rounding errors).
-- A fixed-point number may be **accurate** (exact representation) but **less precise** (limited decimal places).
 
 ---
 
@@ -180,29 +172,45 @@ int main() {
 
 ---
 
-## 🔹 Key Differences in Precision:
+# 🧠 **Precision vs. Accuracy**
 
-| Feature                | Floating-Point                                  | Fixed-Point                                       |
-|------------------------|-----------------------------------------------|--------------------------------------------------|
-| Representation         | Approximation of real numbers (scientific notation) | Exact representation of fixed-point numbers |
-| Precision             | Limited to a few significant digits (7-16)    | High precision based on frac_bits              |
-| Arithmetic Operations | Rounding errors accumulate                     | Exact arithmetic with no rounding errors       |
-| Use Cases            | Ideal for scientific calculations but not for money, counters, or hardware | Ideal for embedded systems, financial applications, and hardware without floating-point support |
+- **Precision**: How detailed or consistent a value is when repeatedly measured.
+- **Accuracy**: How close a value is to the true or expected value.
 
----
-
-## Floating-Point Numbers
-
-Floating-point numbers are stored in a **sign + exponent + mantissa** format.
-
-✅ Computers use **binary scientific notation**.
-
-❌ Not all decimal numbers can be exactly stored in binary, causing **rounding errors**.
-
-📜 **IEEE 754** helps standardize floating-point representation across computers.
+📌 **Example**:
+- A floating-point number may be **precise** (many decimal places) but **not accurate** (rounding errors).
+- A fixed-point number may be **accurate** (exact representation) but **less precise** (limited decimal places).
 
 ---
 
+# ⚡ **Floating-Point & Fixed-Point Numbers**
+
+### 🔹 **Floating-Point Representation (IEEE 754)**
+
+| Format           | Sign Bit | Exponent Bits | Mantissa Bits |
+|-----------------|---------|--------------|--------------|
+| Single Precision (32-bit) | 1 | 8 | 23 |
+| Double Precision (64-bit) | 1 | 11 | 52 |
+
+Example: **6.75 in IEEE 754 format**
+1. Convert `6.75` to binary → `110.11`
+>> **Integer:** 6 in binary is 110
+>> **Fractional Bits:** 0.75
+- Multiply 0.75 by 2 → 1.5 (take the 1).
+- Multiply 0.5 by 2 → 1.0 (take the 1).
+- So 0.75 becomes .11 in binary.
+>> `6.75` to binary → `110.11`
+
+2. Normalize `110.11` → `1.1011 × 2^2`
+>> **Mantissa** : 1.1011 (ignoring the leading 1).
+>> **Exponent** : 2 because the decimal point moved 2 places to the left.
+
+3. Store as `Sign | Exponent (biased) | Mantissa`
+>> **Sign Bit** : 0
+>> **Exponenet Bit** : 2 + 127 = 129; 10000001(binary)
+>> **Mantissa** : Ignore leading 1; and store rest (10110000000000000000000).
+
+---
 ## Fixed-Point Numbers
 
 ### Example Calculation:
@@ -215,20 +223,14 @@ Floating-point numbers are stored in a **sign + exponent + mantissa** format.
 - **Shifting a fixed-point number right** divides by 2.
 - **Shifting a fixed-point number left** multiplies by 2.
 
-### Fixed-Point Representation:
+### 🔹 **Fixed-Point Representation**
 
-To define a fixed-point number, two parameters are needed:
+Fixed-point numbers have a **fixed number of decimal places** and are defined as `fixed<w,b>`:
 
-1️⃣ **Width of the number representation.**
-2️⃣ **Binary point position within the number.**
+- `w`: Total bit-width
+- `b`: Binary point position
 
-### Notation: `fixed<w,b>`
+Example: `fixed<8,3>` → **Binary representation: `00010.110`**
 
-- `w`: Width of the number.
-- `b`: Position of the binary point (from least significant bit).
-
-Example: `fixed<8,3>` with representation **00010.110** means:
-
-- `110` is behind the binary point.
-- **Binary representation**: `00010.110`. 
+---
 

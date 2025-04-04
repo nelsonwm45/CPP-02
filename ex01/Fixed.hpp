@@ -15,6 +15,8 @@
 /*
 	fixed-point value is a way to reallocate the bits of an integer (or similar type)
 	to store both the integer part and the fractional (decimal) part.
+
+	floating point has precision loss and rounding errors
 */
 class Fixed
 {
