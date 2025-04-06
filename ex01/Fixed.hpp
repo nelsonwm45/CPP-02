@@ -2,6 +2,7 @@
 #define FIXED_HPP
 
 #include <iostream>
+#include <cmath> // for roundf
 
 # define RED "\033[31m"
 # define GREEN "\033[32m"
@@ -21,7 +22,7 @@
 class Fixed
 {
 	private:
-		int	fixed_value;
+		int					fixed_value;
 		static const int	frac_bits;
 
 	public:
@@ -43,9 +44,15 @@ class Fixed
 		// destructor
 		~Fixed(void);
 
-		int getRawBits(void) const;
-		void setRawBits(int const raw);
+		int		getRawBits(void) const;
+		void	setRawBits(int const raw);
+
+		float	toFloat(void) const;
+		int		toInt(void) const;
 };
+
+// overload of insertion (<<)
+std::ostream	&operator<<(std::ostream &output, const Fixed& other);
 
 
 #endif
