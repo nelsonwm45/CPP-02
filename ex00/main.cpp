@@ -1,8 +1,8 @@
 #include "Fixed.hpp"
 
-// /*
-// 	The following main is from pdf
-// */
+/*
+	The following main is from pdf
+*/
 int	main(void)
 {
 	Fixed a;
