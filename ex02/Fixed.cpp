@@ -338,7 +338,7 @@ Fixed	&Fixed::max(Fixed& first, Fixed& second)
 }
 
 /*
-	Astatic member function max that takes as parameters two references to constant
+	A static member function max that takes as parameters two references to constant
 	fixed-point numbers, and returns a reference to the greatest one.
 */
 const Fixed	&Fixed::max(const Fixed& first, const Fixed& second)

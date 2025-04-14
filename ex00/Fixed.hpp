@@ -15,7 +15,7 @@
 class Fixed
 {
 	private:
-		int	fixed_value;
+		int					fixed_value;
 		static const int	frac_bits;
 
 	public:
