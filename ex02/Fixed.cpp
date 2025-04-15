@@ -174,7 +174,7 @@ bool	Fixed::operator<=(const Fixed& other) const
 
 bool	Fixed::operator==(const Fixed& other) const
 {
-	if (std::abs(this->toFloat() - other.toFloat()) < 0.0001f)
+	if (this->fixed_value == other.fixed_value)
 		return (true);
 	else
 		return (false);
