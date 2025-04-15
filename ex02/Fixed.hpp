@@ -42,18 +42,18 @@ class Fixed
 		Fixed	&operator=(const Fixed& other);
 
 		// 6 comparison operators: >, <, >=, <=, == and !=
-		bool	operator>(const Fixed& other);
-		bool	operator>=(const Fixed& other);
-		bool	operator<(const Fixed& other);
-		bool	operator<=(const Fixed& other);
-		bool	operator==(const Fixed& other);
-		bool	operator!=(const Fixed& other);
+		bool	operator>(const Fixed& other) const;
+		bool	operator>=(const Fixed& other) const;
+		bool	operator<(const Fixed& other) const;
+		bool	operator<=(const Fixed& other) const;
+		bool	operator==(const Fixed& other) const;
+		bool	operator!=(const Fixed& other) const;
 
 		// 4 arithmetic operators: +,-, *, and /
-		Fixed	operator+(const Fixed& other);
-		Fixed	operator-(const Fixed& other);
-		Fixed	operator*(const Fixed& other);
-		Fixed	operator/(const Fixed& other);
+		Fixed	operator+(const Fixed& other) const;
+		Fixed	operator-(const Fixed& other) const;
+		Fixed	operator*(const Fixed& other) const;
+		Fixed	operator/(const Fixed& other) const;
 
 		
 		// Since increment is based on smallest representable ϵ such as 1 + ϵ > 1

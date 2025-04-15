@@ -140,7 +140,7 @@ std::ostream	&operator<<(std::ostream &output, const Fixed& other)
 		you do not want to modify anything
 */
 // comparsion operator: >
-bool	Fixed::operator>(const Fixed& other)
+bool	Fixed::operator>(const Fixed& other) const
 {
 	if (this->fixed_value > other.fixed_value)
 		return (true);
@@ -148,7 +148,7 @@ bool	Fixed::operator>(const Fixed& other)
 		return (false);
 }
 
-bool	Fixed::operator>=(const Fixed& other)
+bool	Fixed::operator>=(const Fixed& other) const
 {
 	if (this->fixed_value >= other.fixed_value)
 		return (true);
@@ -156,7 +156,7 @@ bool	Fixed::operator>=(const Fixed& other)
 		return (false);
 }
 
-bool	Fixed::operator<(const Fixed& other)
+bool	Fixed::operator<(const Fixed& other) const
 {
 	if (this->fixed_value < other.fixed_value)
 		return (true);
@@ -164,7 +164,7 @@ bool	Fixed::operator<(const Fixed& other)
 		return (false);
 }
 
-bool	Fixed::operator<=(const Fixed& other)
+bool	Fixed::operator<=(const Fixed& other) const
 {
 	if (this->fixed_value <= other.fixed_value)
 		return (true);
@@ -172,15 +172,15 @@ bool	Fixed::operator<=(const Fixed& other)
 		return (false);
 }
 
-bool	Fixed::operator==(const Fixed& other)
+bool	Fixed::operator==(const Fixed& other) const
 {
-	if (this->fixed_value == other.fixed_value)
+	if (std::abs(this->toFloat() - other.toFloat() < 0.0001f))
 		return (true);
 	else
 		return (false);
 }
 
-bool	Fixed::operator!=(const Fixed& other)
+bool	Fixed::operator!=(const Fixed& other) const
 {
 	if (this->fixed_value != other.fixed_value)
 		return (true);
@@ -191,7 +191,7 @@ bool	Fixed::operator!=(const Fixed& other)
 /*
 	4 arithmetic operators: +,-, *, and /
 */
-Fixed	Fixed::operator+(const Fixed& other)
+Fixed	Fixed::operator+(const Fixed& other) const
 {
 	Fixed	newFixed;
 	float	v1 = 0;
@@ -205,7 +205,7 @@ Fixed	Fixed::operator+(const Fixed& other)
 	return (newFixed);
 }
 
-Fixed	Fixed::operator-(const Fixed& other)
+Fixed	Fixed::operator-(const Fixed& other) const
 {
 	Fixed	newFixed;
 	float	v1 = 0;
@@ -219,7 +219,7 @@ Fixed	Fixed::operator-(const Fixed& other)
 	return (newFixed);
 }
 
-Fixed	Fixed::operator*(const Fixed& other)
+Fixed	Fixed::operator*(const Fixed& other) const
 {
 	Fixed	newFixed;
 	float	v1 = 0;
@@ -233,7 +233,7 @@ Fixed	Fixed::operator*(const Fixed& other)
 	return (newFixed);
 }
 
-Fixed	Fixed::operator/(const Fixed& other)
+Fixed	Fixed::operator/(const Fixed& other) const
 {
 	Fixed	newFixed;
 	float	v1 = 0;
