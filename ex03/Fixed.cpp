@@ -10,6 +10,12 @@
 */
 const int	Fixed::frac_bits = 8;
 
+/*
+	A scale for conversion
+	if frac_bits = 8, then the value is 256
+*/
+const int	Fixed::convert_scale = 1 << frac_bits;
+
 // Initialise the value to 0
 Fixed::Fixed(): fixed_value(0)
 {
@@ -194,58 +200,58 @@ bool	Fixed::operator!=(const Fixed& other) const
 Fixed	Fixed::operator+(const Fixed& other) const
 {
 	Fixed	newFixed;
-	float	v1 = 0;
-	float	v2 = 0;
-	float	results = 0;
+	int	results = 0;
 
-	v1 = this->toFloat();
-	v2 = other.toFloat();
-	results = v1 + v2;
-	newFixed = Fixed(results);
+	results = this->fixed_value + other.fixed_value;
+	newFixed.setRawBits(results);
 	return (newFixed);
 }
 
 Fixed	Fixed::operator-(const Fixed& other) const
 {
 	Fixed	newFixed;
-	float	v1 = 0;
-	float	v2 = 0;
-	float	results = 0;
+	int	results = 0;
 
-	v1 = this->toFloat();
-	v2 = other.toFloat();
-	results = v1 - v2;
-	newFixed = Fixed(results);
+	results = this->fixed_value - other.fixed_value;
+	newFixed.setRawBits(results);
 	return (newFixed);
 }
 
+/*
+	Provided frac_bits = 8
+	256a * 256b = ab(256)^2 
+	so u need to remove 1 time 256, similar to >> 2^8
+	ab(256)^2 / 256 = 256 ab
+*/
 Fixed	Fixed::operator*(const Fixed& other) const
 {
 	Fixed	newFixed;
-	float	v1 = 0;
-	float	v2 = 0;
-	float	results = 0;
+	int	results = 0;
 
-	v1 = this->toFloat();
-	v2 = other.toFloat();
-	results = v1 * v2;
-	newFixed = Fixed(results);
+	results = (this->fixed_value * other.fixed_value) >> frac_bits;
+	newFixed.setRawBits(results);
 	return (newFixed);
 }
 
+/*
+	Provided frac_bits = 8
+	256a / 256b = a/b (So u lacking 256 here as a fixed point number)
+	a/b * 256 (now u re fixed point value)
+	but this way will cause u loss decimal while dividing, so u have to multiply before division
+	(256 * 256)a / 256b = (256)(a/b)
+*/
 Fixed	Fixed::operator/(const Fixed& other) const
 {
 	Fixed	newFixed;
-	float	v1 = 0;
-	float	v2 = 0;
-	float	results = 0;
+	int	temp = 0;
+	int	results = 0;
 
-	v1 = this->toFloat();
-	v2 = other.toFloat();
-	results = v1 / v2;
-	newFixed = Fixed(results);
+	temp = this->fixed_value << frac_bits;
+	results = temp / other.fixed_value;
+	newFixed.setRawBits(results);
 	return (newFixed);
 }
+
 
 /*
 	The 4 increment/decrement operators : ++x, x++, --x, x++

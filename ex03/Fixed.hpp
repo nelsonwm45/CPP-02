@@ -24,6 +24,7 @@ class Fixed
 	private:
 		int					fixed_value;
 		static const int	frac_bits;
+		static const int	convert_scale;
 
 	public:
 		// default constructor
